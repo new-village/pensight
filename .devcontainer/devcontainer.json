@@ -1,0 +1,22 @@
+{
+    "name": "Pensight Flutter Dev",
+    "build": {
+      "dockerfile": "Dockerfile"
+    },
+    "customizations": {
+      "vscode": {
+        "extensions": [
+          "dart-code.flutter",
+          "dart-code.dart",
+          "github.copilot",
+          "robert-brunhage.flutter-riverpod-snippets",
+          "coenraads.bracket-pair-colorizer-2",
+          "usernamehw.errorlens",
+          "humao.rest-client"
+        ]
+      }
+    },
+    "forwardPorts": [3000, 5000],
+    "postCreateCommand": "flutter doctor"
+  }
+  
