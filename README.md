@@ -20,5 +20,16 @@ Peninsight is a note-taking and management application built with Flutter. It le
 2. Run `flutter pub get` to install dependencies.
 3. Run `flutter run` to launch the application.
 
+## lib Directory
+- main.dart: The entry point of the Flutter application.
+- app.dart: Initializes the main theme and sets up the home screen.
+- notes_page.dart: Manages the list of notes and the main user interface.
+- models/note.dart: Defines the Note data class with title and content.
+- widgets/ruled_background.dart: Provides a lined paper background for note editing.
+- widgets/management_menu.dart: Displays a dialog to configure settings like dark mode and font size.
+- widgets/fab_sub_button.dart: A smaller FAB with a label for sub-menu actions.
+- widgets/note_editor.dart: A text editor widget with lined background support.
+- widgets/note_list.dart: Renders a list of notes with swipe-to-delete and long-press rename.
+
 ## License
 This project is licensed under the MIT License.

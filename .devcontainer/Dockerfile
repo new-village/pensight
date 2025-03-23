@@ -3,7 +3,7 @@ FROM ubuntu:22.04
 
 # 必要なパッケージのインストール
 RUN apt-get update && apt-get install -y \
-  curl git unzip xz-utils zip libglu1-mesa wget clang cmake ninja-build pkg-config libgtk-3-dev liblzma-dev ca-certificates software-properties-common apt-transport-https gnupg　\
+  curl git unzip xz-utils zip libglu1-mesa wget clang cmake ninja-build pkg-config libgtk-3-dev liblzma-dev ca-certificates software-properties-common apt-transport-https gnupg \
   && apt-get clean
 
 # 環境変数設定
@@ -17,11 +17,3 @@ RUN git clone https://github.com/flutter/flutter.git -b stable --depth 1 $FLUTTE
 
 # Webサポート有効化（必要に応じて）
 RUN flutter config --enable-web
-
-# ✅ Chrome のインストール
-RUN wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | apt-key add - && \
-    echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google-chrome.list && \
-    apt-get update && \
-    apt-get install -y google-chrome-stable
-
-ENV CHROME_EXECUTABLE=/usr/bin/google-chrome

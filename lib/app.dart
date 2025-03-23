@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'notes.dart';
+import 'notes_page.dart';
 
 class MyApp extends StatefulWidget {
   const MyApp({super.key});
@@ -18,7 +18,7 @@ class _MyAppState extends State<MyApp> {
       theme: _isDarkMode
           ? ThemeData.dark().copyWith(
               primaryColor: Colors.deepOrange,
-              colorScheme: ColorScheme.dark(primary: Colors.deepOrange),
+              colorScheme: const ColorScheme.dark(primary: Colors.deepOrange),
             )
           : ThemeData(
               primarySwatch: Colors.deepOrange,

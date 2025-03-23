@@ -1,43 +1,23 @@
-name: pages-build-deployment
-
+name: Flutter Build and Deploy
 on:
-    push:
-        branches:
-        - main
+  push:
+    branches:
+      - main
 
 jobs:
-    build:
-        runs-on: ubuntu-latest
-
-        steps:
-        - name: Checkout repository
-          uses: actions/checkout@v3
-
-        - name: Setup Flutter
-          uses: subosito/flutter-action@v2
-          with:
-            channel: stable
-
-        - name: Install Chromium for Flutter Web
-          run: sudo apt-get update && sudo apt-get install -y chromium-browser
-
-        - name: Build Flutter Web
-          run: flutter build web --release
-
-        - name: Prepare docs directory
-          run: |
-            rm -rf docs
-            mkdir -p docs
-            cp -r build/web/* docs/
-            touch docs/.nojekyll
-
-        - name: Remove all SCSS files
-          run: |
-            find docs -type f \( -name '*.scss' -o -name '*.sass' \) -delete
-
-        - name: Deploy to GitHub Pages
-          uses: peaceiris/actions-gh-pages@v3
-          with:
-            github_token: ${{ secrets.GITHUB_TOKEN }}
-            publish_dir: docs
-            jekyll: false
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+      - run: flutter build web
+      - run: mkdir -p docs && cp -r build/web/* docs/
+      - name: Upload to GitHub Pages
+        uses: actions/upload-pages-artifact@v1
+        with:
+          path: docs
+      - name: Deploy
+        id: deploy
+        uses: actions/deploy-pages@v1
