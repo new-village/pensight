@@ -1,13 +1,12 @@
 name: Deploy to GitHub Pages
 
-# Add the following permission block to grant write access:
 permissions:
   contents: write
 
 on:
   push:
     branches:
-      - main  # Modify if your default branch is different
+      - main
 
 jobs:
   build:
@@ -28,17 +27,21 @@ jobs:
       - name: Build Flutter Web
         run: flutter build web --release
 
+      # docsディレクトリ作成しFlutter Webの成果物をコピー
       - name: Prepare docs directory
         run: |
-           rm -rf docs
-           mkdir docs
-           cp -r build/web/* docs/
-           # Disable Jekyll processing by creating .nojekyll file
-           touch docs/.nojekyll
+          rm -rf docs
+          mkdir docs
+          cp -r build/web/* docs/
+          touch docs/.nojekyll
+
+      # 不要なSCSSファイルを削除（Jekyllが処理しようとするのを防ぐ）
+      - name: Remove SCSS if present
+        run: rm -f docs/assets/css/style.scss
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: docs
-          jekyll: false  // Disable Jekyll processing to prevent the SCSS conversion error
+          jekyll: false
