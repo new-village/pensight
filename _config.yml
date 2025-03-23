@@ -1,0 +1,6 @@
+sass:
+  sass_dir: assets/css
+  style: compressed
+
+source: .
+destination: _site
